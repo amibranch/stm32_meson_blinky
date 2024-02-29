@@ -1,0 +1,33 @@
+[binaries]
+c = '/usr/bin/arm-none-eabi-gcc'
+cpp = '/usr/bin/arm-none-eabi-g++'
+ar = '/usr/bin/arm-none-eabi-ar'
+strip = '/usr/bin/arm-none-eabi-strip'
+objcopy = '/usr/bin/arm-none-eabi-objcopy'
+
+[properties]
+stm32family = 'f4'
+stm32subfamily = 'f4xx'
+variant = 'stm32f401xe'
+
+[built-in options]
+
+c_args = [
+  '-DSTM32F401xE',
+  '-DWEACTV30',
+  ]
+
+cpp_args = [
+  '-DSTM32F401xE',
+  '-DWEACTV30',
+  ]
+
+c_link_args = ['-Wl,--gc-sections', ]
+cpp_link_args = ['-Wl,--gc-sections', ]
+
+[host_machine]
+system = 'bare'
+cpu_family = 'arm'
+cpu = 'cortex-m4'
+endian = 'little'
+

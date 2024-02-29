@@ -1,0 +1,11 @@
+
+# Wrap project paths
+Adafruit-GFX-Library-1.5.7/*
+Adafruit_SSD1306-2.5.8/*
+ArduinoCore-avr-1.8.6/*
+UIPEthernet-2.0.12/*
+pubsubclient-2.7/*
+#PubSubClient-1.99.2/*
+
+# WrapDB cache
+packagecache/*
