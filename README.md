@@ -24,18 +24,18 @@ $ meson setup --cross-file=stm32f407xx.cross build_f4
 $ meson compile -C build_f4
 ```
 
-## Flash
-
-Either use the specific build-target:
-`$ meson compile -C build_f4 flash`
-Or simple use stlink by yourself:
-`$ st-flash --reset write ./build_f4/sr/main.bin 0x8000000`
-
 ## Detecting your device
 
 If stlink has problems, ensure that the connection is up and the device is detected by the stlink
 software. You can do this by the following command:
 `st-info --probe`
+
+## Flash
+
+Either use the specific build-target:
+`$ meson compile -C build_f4 flash`
+Or simple use stlink by yourself (recommended):
+`$ st-flash --reset write ./build_f4/src/main.bin 0x8000000`
 
 ## Debugging
 
@@ -66,6 +66,16 @@ Currently, the toolchain has been tested on the following devices and developmen
 * WeAct V3.0 (STM32F401CCU6)
 * NUCLEO32-L031K6 (STM32L031K6)
 * NUCLEO32-G431KB (STM32G431KB)
+
+# TODOs
+
+* The linker-scripts are just taken from elsewhere. They could also just simply be crafted directly
+  from the memory layout of different MCUs
+* The cross-files are currently named for the MCUs. This is not really correct, as they mostly set
+  Dev-board-specific defines that must be supported by the source-code (e.g. which pin and port
+  is connected to the User-LED, etc.)
+* Extend the source-code to demonstrate more features (e.g. with Ethernet-examples, ...)
+* Create another example that facilitates libopencm3 and shows integration-testing via Qemu!
 
 # Participating
 

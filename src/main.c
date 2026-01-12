@@ -1,23 +1,40 @@
 #include <stdint.h>
 
-
 #ifdef STM32L031xx
-#define C13_Pin GPIO_PIN_3
-#define C13_GPIO_Port GPIOB
+#define LED_GPIO_PIN         3
+#define LED_GPIO_PORT        GPIOB
+#define LED_GPIO_CLK_ENABLE() __HAL_RCC_GPIOB_CLK_ENABLE()
 #endif
 
 #ifdef STM32F401xE
-#define C13_Pin GPIO_PIN_13
-#define C13_GPIO_Port GPIOC
+#define LED_GPIO_PIN         13
+#define LED_GPIO_PORT        GPIOC
+#define LED_GPIO_CLK_ENABLE() __HAL_RCC_GPIOC_CLK_ENABLE()
+
+// WeAct v3.0
+#ifdef WEACTV30
+#define KEY_Pin GPIO_PIN_0
+#define KEY_GPIO_Port GPIOA
+#endif
+#endif
+
+#ifdef STM32F405xx
+#define LED_GPIO_PIN         13
+#define LED_GPIO_PORT        GPIOC
+#define LED_GPIO_CLK_ENABLE() __HAL_RCC_GPIOC_CLK_ENABLE()
 #endif
 
 #ifdef STM32G431xx
-#define C13_Pin GPIO_PIN_8
-#define C13_GPIO_Port GPIOB
+#define LED_GPIO_PIN         8
+#define LED_GPIO_PORT        GPIOB
+#define LED_GPIO_CLK_ENABLE() __HAL_RCC_GPIOB_CLK_ENABLE()
 #endif
 
-#define KEY_Pin GPIO_PIN_0
-#define KEY_GPIO_Port GPIOA
+#ifdef NUCLEO144_F722ZE
+#define LED_GPIO_PIN         0
+#define LED_GPIO_PORT        GPIOB
+#define LED_GPIO_CLK_ENABLE() __HAL_RCC_GPIOB_CLK_ENABLE()
+#endif
 
 /** Configure pins as 
         * Analog 
@@ -32,23 +49,17 @@ void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStruct = {0};
 
   /* GPIO Ports Clock Enable */
-  __HAL_RCC_GPIOC_CLK_ENABLE();
-#ifndef STM32G431xx
-  __HAL_RCC_GPIOH_CLK_ENABLE();
-#else
-  __HAL_RCC_GPIOB_CLK_ENABLE();
-#endif
-  __HAL_RCC_GPIOA_CLK_ENABLE();
+  LED_GPIO_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(C13_GPIO_Port, C13_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(LED_GPIO_PORT, LED_GPIO_PIN, GPIO_PIN_SET);
 
   /*Configure GPIO pin : PtPin */
-  GPIO_InitStruct.Pin = C13_Pin;
+  GPIO_InitStruct.Pin = LED_GPIO_PIN;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(C13_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(LED_GPIO_PORT, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PtPin */
 #ifdef WEACTV30
@@ -72,10 +83,10 @@ int main(void) {
   {
 
         // Toggle the LED
-        HAL_GPIO_TogglePin(C13_GPIO_Port, C13_Pin);
+        HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_GPIO_PIN);
 
         // Wait for 500 ms
-        HAL_Delay(100);
+        HAL_Delay(500);
 
         // Rinse and repeat :)
 

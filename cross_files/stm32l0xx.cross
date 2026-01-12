@@ -1,0 +1,33 @@
+[binaries]
+c = '/usr/bin/arm-none-eabi-gcc'
+cpp = '/usr/bin/arm-none-eabi-g++'
+ar = '/usr/bin/arm-none-eabi-ar'
+strip = '/usr/bin/arm-none-eabi-strip'
+objcopy = '/usr/bin/arm-none-eabi-objcopy'
+
+[properties]
+variant = 'stm32l031xx'
+linker_script_nae = 'stm32l0xx_flash.ld'
+
+[built-in options]
+
+c_args = [
+  '-DSTM32L031xx',
+  '-DSTM32DEVICE=stm32l031xx',
+  ]
+
+cpp_args = [
+  '-DSTM32L031xx',
+  '-DSTM32DEVICE=stm32l031xx',
+  ]
+
+c_link_args = ['-Wl,--gc-sections', ]
+cpp_link_args = ['-Wl,--gc-sections', ]
+
+[host_machine]
+system = 'bare'
+cpu_family = 'arm'
+cpu = 'cortex-m0plus'
+endian = 'little'
+
+

@@ -16,6 +16,7 @@ project('cmsis_core', 'c', 'cpp',
     ],
   )
 
+# TODO: Fill these headers!
 cmsis_core_headers = [
   'Include/cmsis_armcc.h',
   'Include/cmsis_armclang.h',

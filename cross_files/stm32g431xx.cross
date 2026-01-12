@@ -6,20 +6,19 @@ strip = '/usr/bin/arm-none-eabi-strip'
 objcopy = '/usr/bin/arm-none-eabi-objcopy'
 
 [properties]
-stm32family = 'l0'
-stm32subfamily = 'l0xx'
-variant = 'stm32l031xx'
+variant = 'stm32g431xx'
+linker_script_name = 'STM32G431RBTX_FLASH.ld'
 
 [built-in options]
 
 c_args = [
-  '-DSTM32L031xx',
-  '-DSTM32DEVICE=stm32l031xx',
+  '-DSTM32G431xx',
+#  '--include=stm32g4xx.h',
   ]
 
 cpp_args = [
-  '-DSTM32L031xx',
-  '-DSTM32DEVICE=stm32l031xx',
+  '-DSTM32G431xx',
+#  '--include=stm32g4xx.h',
   ]
 
 c_link_args = ['-Wl,--gc-sections', ]
@@ -28,7 +27,6 @@ cpp_link_args = ['-Wl,--gc-sections', ]
 [host_machine]
 system = 'bare'
 cpu_family = 'arm'
-cpu = 'cortex-m0plus'
+cpu = 'cortex-m4'
 endian = 'little'
-
 

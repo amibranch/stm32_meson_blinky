@@ -1,0 +1,31 @@
+[binaries]
+c = '/usr/bin/arm-none-eabi-gcc'
+cpp = '/usr/bin/arm-none-eabi-g++'
+ar = '/usr/bin/arm-none-eabi-ar'
+strip = '/usr/bin/arm-none-eabi-strip'
+objcopy = '/usr/bin/arm-none-eabi-objcopy'
+
+[properties]
+variant = 'stm32f722xx'
+linker_script_name = 'STM32F722ZETx_FLASH.ld'
+
+[built-in options]
+
+c_args = [
+  '-DSTM32F722xx',
+  '-DNUCLEO144_F722ZE',
+  ]
+
+cpp_args = [
+  '-DSTM32F722xx',
+  '-DNUCLEO144_F722ZE',
+  ]
+
+c_link_args = ['-Wl,--gc-sections', ]
+cpp_link_args = ['-Wl,--gc-sections', ]
+
+[host_machine]
+system = 'bare'
+cpu_family = 'arm'
+cpu = 'cortex-m7'
+endian = 'little'

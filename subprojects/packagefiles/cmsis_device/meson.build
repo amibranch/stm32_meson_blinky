@@ -16,8 +16,9 @@ project('cmsis_device', 'c', 'cpp',
     ],
   )
 
-dev_subfamily = meson.get_external_property('stm32subfamily')
 dev_variant = meson.get_external_property('variant')
+dev_family = dev_variant.substring(5,7)
+dev_subfamily = '@0@xx'.format(dev_family)
 
 # FIXME: figure out the other compilers (ARM, IAR) and support them automagically
 if meson.get_compiler('c').get_id() != 'gcc'

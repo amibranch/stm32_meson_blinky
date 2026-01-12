@@ -1,0 +1,8 @@
+[wrap-git]
+url = https://github.com/STMicroelectronics/cmsis_device_h7.git
+revision =v1.10.6
+# depth = 1
+
+patch_directory = cmsis_device
+
+

@@ -6,20 +6,19 @@ strip = '/usr/bin/arm-none-eabi-strip'
 objcopy = '/usr/bin/arm-none-eabi-objcopy'
 
 [properties]
-stm32family = 'f4'
-stm32subfamily = 'f4xx'
-variant = 'stm32f401xe'
+variant = 'stm32f405xx'
+linker_script_name = 'stm32f40xx_flash.ld'
 
 [built-in options]
 
 c_args = [
-  '-DSTM32F401xE',
-  '-DWEACTV30',
+  '-DSTM32F405xx',
+#  '-DWEACTV30',
   ]
 
 cpp_args = [
-  '-DSTM32F401xE',
-  '-DWEACTV30',
+  '-DSTM32F405xx',
+#  '-DWEACTV30',
   ]
 
 c_link_args = ['-Wl,--gc-sections', ]
@@ -30,4 +29,3 @@ system = 'bare'
 cpu_family = 'arm'
 cpu = 'cortex-m4'
 endian = 'little'
-

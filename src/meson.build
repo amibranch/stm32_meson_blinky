@@ -1,32 +1,18 @@
 
 assert(meson.is_cross_build(), 'This project can only be built in a cross build environment.')
 
-stmfam = meson.get_external_property('stm32family')
-stmsubfam = meson.get_external_property('stm32subfamily')
+stmfam = meson.get_external_property('variant').substring(5,7)
+stmsubfam = '@0@xx'.format(stmfam)
 
 platform_link_args = []
 platform_c_args = []
 
-if stmfam == 'l0'
-  hal_driver_subp = 'stm32l0xx_hal_driver'
-  cmsis_dev_subp = 'cmsis_device_l0'
-  linker_script = join_paths(meson.current_source_dir(), 'linkerscripts', 'stm32l0xx_flash.ld')
-elif stmfam == 'f4'
-  hal_driver_subp = 'stm32f4xx_hal_driver'
-  cmsis_dev_subp = 'cmsis_device_f4'
-  linker_script = join_paths(meson.current_source_dir(), 'linkerscripts', 'stm32f40xx_flash.ld')
-  platform_link_args += [
-    '-mfloat-abi=hard',
-    '-mthumb',
-    ]
-  platform_c_args += [
-    '-mfloat-abi=hard',
-    '-mthumb',
-    ]
-elif stmfam == 'g4'
-  hal_driver_subp = 'stm32g4xx_hal_driver'
-  cmsis_dev_subp = 'cmsis_device_g4'
-  linker_script = join_paths(meson.current_source_dir(), 'linkerscripts', 'STM32G431RBTX_FLASH.ld')
+hal_driver_subp = 'stm32@0@_hal_driver'.format(stmsubfam)
+cmsis_dev_subp = 'cmsis_device_@0@'.format(stmfam)
+linker_script_name = meson.get_external_property('linker_script_name')
+linker_script = join_paths(meson.current_source_dir(), 'linkerscripts', linker_script_name)
+
+if stmfam != 'l0'
   platform_link_args += [
     '-mfloat-abi=hard',
     '-mthumb',
@@ -46,7 +32,7 @@ cmsis_device_dep = cmsis_device.get_variable('cmsis_device_dep')
 cmsis_core = subproject('cmsis_core')
 cmsis_core_dep = cmsis_core.get_variable('cmsis_core_dep')
 
-exe = executable('main.elf', ['main.c' ],
+exe = executable('main.elf', ['main.c' ], # 'startup_stm32f40xx.s', ],
   c_args : [
     '-DUSE_FULL_LL_DRIVER',
     '-DUSE_HAL_DRIVER',

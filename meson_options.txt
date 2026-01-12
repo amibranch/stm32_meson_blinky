@@ -1,0 +1,9 @@
+# Performance and debugging related options
+#option('enable_tracing', type: 'boolean', value: false)
+#option('enable_profiling', type: 'boolean', value: false)
+#option('enable_rdtscp', type: 'boolean', value: false,
+#  description: 'Use intel rdtscp haswell instruction for performance counters'
+#)
+
+#-mmcu=atmega328p -DF_CPU=16000000L -DARDUINO=10600 -DARDUINO_AVR_PRO -DARDUINO_ARCH_AVR
+

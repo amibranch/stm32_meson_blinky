@@ -16,9 +16,9 @@ project('stm32_hal_driver', 'c', 'cpp',
     ],
   )
 
-dev_family = meson.get_external_property('stm32family')
-dev_subfamily = meson.get_external_property('stm32subfamily')
 dev_variant = meson.get_external_property('variant')
+dev_family = dev_variant.substring(5, 7)
+dev_subfamily = '@0@xx'.format(dev_family)
 
 # FIXME: Make modules dynamic!
 
@@ -296,6 +296,7 @@ stm32_hal_lib = static_library(
   )
 
 stm32_hal_dep = declare_dependency(
+  #link_with: stm32_hal_lib,
     include_directories: ['.', 'Inc', ],
     sources: stm32_hal_headers + stm32_hal_sources,
   )

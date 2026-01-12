@@ -1,0 +1,9 @@
+[wrap-git]
+url = https://github.com/STMicroelectronics/stm32h7xx_hal_driver.git
+revision =v1.11.5
+#revision = HEAD
+# depth = 1
+
+patch_directory = stm32_hal_driver
+
+

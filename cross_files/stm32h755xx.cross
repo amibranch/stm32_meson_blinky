@@ -6,18 +6,19 @@ strip = '/usr/bin/arm-none-eabi-strip'
 objcopy = '/usr/bin/arm-none-eabi-objcopy'
 
 [properties]
-stm32family = 'g4'
-stm32subfamily = 'g4xx'
-variant = 'stm32g431xx'
+variant = 'stm32h755xx'
+linker_script_name = 'STM32H755ZU_FLASH.ld'
 
 [built-in options]
 
 c_args = [
-  '-DSTM32G431xx',
+  '-DSTM32H755xx',
+#  '--include=stm32h755.h',
   ]
 
 cpp_args = [
-  '-DSTM32G431xx',
+  '-DSTM32H755xx',
+#  '--include=stm32h755.h',
   ]
 
 c_link_args = ['-Wl,--gc-sections', ]
@@ -26,6 +27,6 @@ cpp_link_args = ['-Wl,--gc-sections', ]
 [host_machine]
 system = 'bare'
 cpu_family = 'arm'
-cpu = 'cortex-m4'
+cpu = 'cortex-m7'
 endian = 'little'
 
